@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin - Turf Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav><a href="index.html">Book turf</a><a href="admin.html" class="active">Admin</a></nav>
+    <h1>Admin panel</h1>
+    <p>See every booking, confirm cash payments, cancel bookings and block slots.</p>
+  </div>
+</header>
+
+<main>
+  <!-- Login -->
+  <section class="card login" id="loginBox">
+    <h2>Admin login</h2>
+    <div class="field"><label for="user">Username</label><input type="text" id="user" autocomplete="username"></div>
+    <div class="field"><label for="pass">Password</label><input type="password" id="pass" autocomplete="current-password"></div>
+    <button class="btn" id="loginBtn">Log in</button>
+    <div class="msg err" id="loginMsg" role="status"></div>
+    <p class="hint">Demo login: admin / admin123</p>
+  </section>
+
+  <!-- Dashboard -->
+  <div id="dash" hidden>
+    <div class="stats" id="stats"></div>
+
+    <section class="card">
+      <div class="bar">
+        <h2>All bookings</h2>
+        <div>
+          <button class="btn small alt" id="csvBtn">Download CSV</button>
+          <button class="btn small alt" id="logoutBtn">Log out</button>
+        </div>
+      </div>
+      <div class="filters">
+        <div><label for="fDate">Date</label><input type="date" id="fDate"></div>
+        <div><label for="fTurf">Turf</label>
+          <select id="fTurf"><option value="">All turfs</option></select></div>
+        <div><label for="fStatus">Status</label>
+          <select id="fStatus"><option value="">All</option><option>Confirmed</option><option>Cancelled</option></select></div>
+        <div><label for="fSearch">Search</label><input type="text" id="fSearch" placeholder="Name, phone or reference"></div>
+        <div><button class="btn small alt" id="clearBtn">Clear filters</button></div>
+      </div>
+      <div class="table-wrap">
+        <table id="tbl">
+          <thead><tr>
+            <th>Ref</th><th>Customer</th><th>Turf</th><th>Date</th><th>Time</th>
+            <th>Amount</th><th>Payment</th><th>Status</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="two">
+      <section class="card">
+        <h2>Block slots (maintenance)</h2>
+        <div class="field"><label for="bTurf">Turf</label><select id="bTurf"></select></div>
+        <div class="field"><label for="bDate">Date</label><input type="date" id="bDate"></div>
+        <div class="row2">
+          <div><label for="bFrom">From</label><select id="bFrom"></select></div>
+          <div><label for="bTo">To (last slot)</label><select id="bTo"></select></div>
+        </div>
+        <button class="btn" id="blockBtn" style="margin-top:12px">Block these slots</button>
+        <div class="msg" id="blockMsg" role="status"></div>
+      </section>
+
+      <section class="card">
+        <h2>Data</h2>
+        <p class="hint" style="margin-bottom:12px">Bookings are stored in this browser. Reset brings back the demo bookings and removes everything else.</p>
+        <button class="btn danger" id="resetBtn">Reset all data</button>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

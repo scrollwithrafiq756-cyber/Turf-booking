@@ -1,0 +1,130 @@
+/* =====================================================
+   style.css  -  used by index.html and admin.html
+   ===================================================== */
+:root {
+  --pitch: #14532d; --chalk: #f5f7f2; --ink: #16210f; --line: #d9e0d2;
+  --green: #22a45d; --yellow: #f2b705; --red: #d9382f; --grey: #c9cfc4;
+  --card: #ffffff; --blue: #1d4ed8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Figtree, system-ui, sans-serif; background: var(--chalk); color: var(--ink); line-height: 1.5; }
+h1, h2, h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; line-height: 1.15; }
+[hidden] { display: none !important; }
+
+/* ----- Header (looks like a pitch with a centre line) ----- */
+header { background: var(--pitch); color: #fff; padding: 22px 20px 52px; position: relative; overflow: hidden; }
+header::after { content: ""; position: absolute; inset: 14px; border: 2px solid rgba(255,255,255,.22); border-radius: 6px; pointer-events: none; }
+header::before { content: ""; position: absolute; left: 50%; top: 14px; bottom: 14px; width: 2px; background: rgba(255,255,255,.22); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
+header h1 { font-size: clamp(28px, 6vw, 48px); font-weight: 800; margin-top: 18px; }
+header p { margin-top: 8px; max-width: 48ch; color: #d6ebdc; }
+nav { display: flex; gap: 8px; }
+nav a { color: #d6ebdc; text-decoration: none; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 14px; }
+nav a.active { background: rgba(255,255,255,.18); color: #fff; }
+nav a:hover { background: rgba(255,255,255,.12); }
+
+main { max-width: 1000px; margin: -26px auto 40px; padding: 0 16px; position: relative; z-index: 2; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; margin-bottom: 16px; }
+.card h2 { font-size: 20px; margin-bottom: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+
+/* ----- Form controls ----- */
+label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; }
+input[type=date], input[type=text], input[type=tel], input[type=password], select {
+  font: inherit; padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 6px; width: 100%; background: #fff; color: var(--ink);
+}
+input:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.field { margin-bottom: 12px; }
+.hint { font-size: 13px; color: #5d6a52; margin-top: 6px; }
+.msg { margin-top: 10px; font-size: 14px; min-height: 20px; }
+.msg.err { color: var(--red); }
+.msg.ok { color: var(--pitch); font-weight: 600; }
+.empty { color: #68745e; font-size: 14px; }
+ul { list-style: none; }
+
+/* ----- Buttons ----- */
+.btn { background: var(--pitch); color: #fff; border: 0; border-radius: 8px; padding: 12px 18px; font: inherit; font-weight: 600; cursor: pointer; width: 100%; }
+.btn:hover:not(:disabled) { background: #0f4023; }
+.btn:disabled { background: #9aa797; cursor: not-allowed; }
+.btn.alt { background: #fff; color: var(--pitch); border: 1.5px solid var(--pitch); }
+.btn.alt:hover:not(:disabled) { background: #ecf6ee; }
+.btn.danger { background: var(--red); }
+.btn.danger:hover:not(:disabled) { background: #b32d25; }
+.btn.small { width: auto; padding: 7px 12px; font-size: 14px; }
+.cancel { background: none; border: 1.5px solid var(--red); color: var(--red); border-radius: 6px; padding: 5px 10px; cursor: pointer; font: inherit; font-size: 13px; }
+
+/* ----- Turf choice ----- */
+.turfs { display: flex; gap: 10px; flex-wrap: wrap; }
+.turf-btn { flex: 1 1 200px; text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 8px; padding: 12px 14px; cursor: pointer; font: inherit; }
+.turf-btn strong { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; }
+.turf-btn span { font-size: 14px; color: #55624b; }
+.turf-btn[aria-pressed=true] { border-color: var(--pitch); background: #ecf6ee; }
+
+/* ----- Slot grid and colours ----- */
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; margin-bottom: 14px; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.slot { border: 2px solid transparent; border-radius: 8px; padding: 10px 8px; font: inherit; text-align: center; cursor: pointer; color: #fff; font-weight: 600; }
+.slot small { display: block; font-weight: 500; font-size: 12px; }
+.slot.free { background: var(--green); }
+.slot.booked { background: var(--red); cursor: not-allowed; }
+.slot.playing { background: var(--yellow); color: #3b2d00; cursor: not-allowed; }
+.slot.past { background: var(--grey); color: #5d6556; cursor: not-allowed; }
+.slot.sel { background: var(--pitch); border-color: #000; box-shadow: 0 0 0 3px #bfe3c9; }
+
+/* ----- Payment ----- */
+.total { display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; margin: 12px 0; font-family: 'Bricolage Grotesque', sans-serif; }
+.pay-methods { display: flex; gap: 8px; margin: 4px 0 12px; }
+.pm { flex: 1; margin: 0; cursor: pointer; }
+.pm input { position: absolute; opacity: 0; }
+.pm span { display: block; text-align: center; padding: 10px; border: 2px solid var(--line); border-radius: 8px; font-weight: 600; }
+.pm input:checked + span { border-color: var(--pitch); background: #ecf6ee; color: var(--pitch); }
+.pm input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+.panel { margin-bottom: 14px; }
+
+/* ----- My bookings / badges ----- */
+.bk { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.bk:last-child { border-bottom: 0; }
+.badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 99px; background: #e8ebe4; color: #3d4733; }
+.badge.ok { background: #d4f0de; color: #0d5a2c; }
+.badge.warn { background: #fdf0c2; color: #6d5100; }
+.badge.bad { background: #fadad7; color: #8f241d; }
+
+/* ----- Receipt dialog ----- */
+dialog { border: 0; border-radius: 12px; padding: 22px; width: min(440px, 92vw); margin: auto; }
+dialog::backdrop { background: rgba(0,0,0,.5); }
+dialog h2 { margin-bottom: 4px; color: var(--pitch); }
+.rc { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+.rc td { padding: 7px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.rc td:first-child { color: #5d6a52; width: 90px; }
+.dlg-actions { display: flex; gap: 10px; margin-top: 16px; }
+
+/* ----- Admin ----- */
+.login { max-width: 380px; margin-left: auto; margin-right: auto; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.stat strong { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; }
+.stat span { font-size: 14px; color: #5d6a52; }
+.bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.bar h2 { margin: 0; }
+.bar div { display: flex; gap: 8px; }
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: end; margin-bottom: 14px; }
+.table-wrap { overflow-x: auto; }
+table#tbl { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 760px; }
+#tbl th { text-align: left; background: #eef2ea; padding: 9px 8px; font-size: 13px; }
+#tbl td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+#tbl small { color: #68745e; }
+.mini { border: 1.5px solid; background: #fff; border-radius: 6px; padding: 4px 9px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; margin-bottom: 4px; }
+.mini.ok { border-color: var(--green); color: #0d5a2c; }
+.mini.bad { border-color: var(--red); color: var(--red); }
+
+@media print {
+  body * { visibility: hidden; }
+  dialog, dialog * { visibility: visible; }
+  dialog { position: absolute; inset: 0; box-shadow: none; }
+  .dlg-actions { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
